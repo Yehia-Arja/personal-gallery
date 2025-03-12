@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios"; 
-import BaseUrl from "../../Config";
 import { useNavigate } from "react-router-dom";
-import "../../assets/styles/login-register.css"
+import authService from "../../services/authService";  // Adjust the path if needed
+import "../../assets/styles/login-register.css";
+import { Link } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,7 +11,6 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
 
-
   const handleSubmit = async () => {
     if (!email || !password) {
       setMessage("Please fill out all the fields");
@@ -19,51 +18,51 @@ const Login = () => {
       return;
     }
     try {
-      const response = await axios.post(`${BaseUrl.baseUrl}login`, {
-        email,
-        password,
-      });
+      const response = await authService.login(email, password);
 
       if (response.data.success) {
-          console.log("Login Success:", response.data);
-          setMessage('Log in successfully')
-          setMessageType('success')
-          navigate("./home")
-        }
+        console.log("Login Success:", response);
+        setMessage('Log in successfully');
+        setMessageType('success');
+        navigate("./home");
+      }
         
     } catch (error) {
-      console.error("Login Error:", error.message);
+      console.error("Login Error:", error);
+      setMessage(error.message || "An error occurred");
+      setMessageType('error');
     }
   };
 
   return (
     <>
-
-      <header class="welcome-header">
+      <header className="welcome-header">
         <h1>Welcome back</h1>
         <p>use email or phone number to login</p>
       </header>
-      <main class="welcome-main">
-        <section class="welcome-section">
-          <div class="welcome-form">
-                  
+      <main className="welcome-main">
+        <section className="welcome-section">
+          <div className="welcome-form">
             <label>Email</label>
             <input type="email" placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
 
             <label>Password</label>
             <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            
             <div>
-              <div className={`message-container ${messageType}`}>{ message }</div>
+              <div className={`message-container ${messageType}`}>{message}</div>
               <button className="welcome-button" onClick={handleSubmit}>L O G I N</button>
-              <p>Don't have an account? <a class="redirect-signup" href="../wallet-client-frontend/html/signup.html">Sign up here</a></p>
+              <p>Don't have an account?
+                <Link to="/signup" className="redirect-signup">
+                  Sign up here
+                </Link>
+              </p>
             </div>
           </div>
         </section>
-          
       </main>
-        
     </>
   );
-}
+};
 
 export default Login;
