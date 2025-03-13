@@ -18,22 +18,21 @@ const Login = () => {
       return;
     }
     try {
-      const response = await authService.login(email, password);
+      const message = await authService.login(email, password);
 
-      if (response.data.success) {
-        console.log("Login Success:", response);
-        setMessage('Log in successfully');
-        setMessageType('success');
-        navigate("./home");
+      if (message === true) {
+        setMessage("Log in successfully");
+        setMessageType("success");
+        navigate("/home");
       }
-        
-    } catch (error) {
-      console.error("Login Error:", error);
-      setMessage(error.message || "An error occurred");
-      setMessageType('error');
-    }
-  };
+      setMessage(message);
+      setMessageType("error");
 
+    } catch (error) {
+      setMessage(error.message);
+      setMessageType("error");
+    }
+};
   return (
     <>
       <header className="welcome-header">

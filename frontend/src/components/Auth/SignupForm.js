@@ -19,13 +19,15 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await authService.signup(email, password, name);
-      if (response.data.success) {
-        console.log("Signup Success:", response);
+      const message = await authService.signup(email, password, name);
+      if (message === true) {
         setMessage("Signed up successfully!");
         setMessageType("success");
-        navigate("./login"); 
+        navigate("/login"); 
       }
+      setMessage(message);
+      setMessageType("error");
+
     } catch (error) {
       setMessage(error.message);
       setMessageType("error");
