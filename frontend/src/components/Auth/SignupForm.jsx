@@ -1,35 +1,36 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import authService from "../services/authService";
-import { Link } from "react-router-dom";
-import "../../assets/styles/login-register.css";
+import { useState } from "react"; // Import the useState hook for managing component state
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook for redirection
+import authService from "../services/authService"; // Import the authentication service
+import { Link } from "react-router-dom"; // Import the Link component for navigation
+import "../../assets/styles/login-register.css"; // Import styles for login and signup pages
 
 const Signup = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("");
+  const navigate = useNavigate(); // Initialize the navigate function for redirection
+  const [email, setEmail] = useState(""); // State to store email input
+  const [password, setPassword] = useState(""); // State to store password input
+  const [name, setName] = useState(""); // State to store name input
+  const [message, setMessage] = useState(""); // State to store feedback messages
+  const [messageType, setMessageType] = useState(""); // State to define message type (success/error)
 
   const handleSubmit = async () => {
     if (!email || !password || !name) {
-      setMessage("Please fill out all the fields");
+      setMessage("Please fill out all the fields"); // Display error message if fields are empty
       setMessageType("error");
       return;
     }
     try {
-      const message = await authService.signup(email, password, name);
-      if (message === true) {
-        setMessage("Signed up successfully!");
-        setMessageType("success");
-        navigate("/login"); 
-      }
-      setMessage(message);
-      setMessageType("error");
+      const response = await authService.signup(email, password, name);
 
+      if (response === true) {
+        setMessage("Signed up successfully!"); // Display success message
+        setMessageType("success");
+        navigate("/login"); // Redirect to login page
+      } else {
+        setMessage(response); // Display error message from the authService
+        setMessageType("error");
+      }
     } catch (error) {
-      setMessage(error.message);
+      setMessage(error.message); // Display error message if an exception occurs
       setMessageType("error");
     }
   };
