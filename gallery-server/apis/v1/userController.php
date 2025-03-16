@@ -34,7 +34,7 @@ class UserController
             return;
         }
 
-        if (!$this->userModel->checkPassword($data['password'])) {
+        if (!$this->userModel->checkPassword($data)) {
             echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
             return;
         }
@@ -42,9 +42,25 @@ class UserController
         $token = $this->userModel->generateAuthToken($user_id);
 
         echo json_encode([
-            'success' => true,
-            'auth_key' => $token,
-            'user_id' => $user_id
-        ]);
+            'success' => true,'message'=>$token]);
+    }
+    public function signin()
+    {
+        global $data;
+
+        if (empty($data['username']) || empty($data['email']) || empty($data['password'])) {
+            echo json_encode(['success' => false, 'message' => 'Missing information']);
+            return;
+        }
+
+        if ($this->userModel->findEmail($data['email'])) {
+            echo json_encode(['success' => false, 'message' => 'Email already exists']);
+            return;
+        }
+        $user_id = $this->userModel->addUser($data);
+        $token = $this->userModel->generateAuthToken($user_id);
+
+        echo json_encode([
+            'success' => true,'message'=>$token]);
     }
 }
