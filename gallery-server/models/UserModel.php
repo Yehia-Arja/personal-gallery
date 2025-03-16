@@ -35,6 +35,7 @@ class UserModel {
     public function addUser($data) {
         $sql = $this->conn->prepare("INSERT INTO users (username,email,password) VALUES (?,?,?)");
         $sql->bind_param("sss", $data['username'], $data['email'], $data['password']);
+        $sql->execute();
 
         $last_inserted_id = $sql->insert_id;
         return $last_inserted_id;

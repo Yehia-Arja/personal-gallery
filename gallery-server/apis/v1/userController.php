@@ -57,9 +57,10 @@ class UserController
             echo json_encode(['success' => false, 'message' => 'Email already exists']);
             return;
         }
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         $user_id = $this->userModel->addUser($data);
         $token = $this->userModel->generateAuthToken($user_id);
 
-        echo json_encode(['success' => true,'message'=>$token]);
+        echo json_encode(['success' => true,'message' => $token]);
     }
 }
