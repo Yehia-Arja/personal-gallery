@@ -1,32 +1,19 @@
 import { useState } from "react";
-import Nav from "../components/Nav";
-import Gallery from "../components/Gallery";
-import Footer from "../components/Footer";
-import request from "../utils/remote/axios"; 
-import { requestMethods } from "../utils/enums/request.methods";
+import Nav from "../../components/layout/Nav";
+import Gallery from "../gallery/index";
+import Hero from "../../components/layout/Hero"
+import "./style.css";
 
 const Home = () => {
-  const [photos, setPhotos] = useState([]);
+    const [search, setSearch] = useState(""); 
 
-  const fetchPhotos = async (query) => {
-    try {
-      const response = await request({
-        method: requestMethods.GET,
-        route: `/photos?q=${query}`,
-      });
-      setPhotos(response.message);
-    } catch (error) {
-      console.error("Error fetching photos:", error);
-    }
-  };
-
-  return (
-    <div>
-      <Nav onSearch={fetchPhotos} />
-      <Gallery photos={photos} /> 
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Nav setSearch={setSearch} />
+            <Hero></Hero>
+            <Gallery search={search} />
+        </div>
+    );
 };
 
 export default Home;

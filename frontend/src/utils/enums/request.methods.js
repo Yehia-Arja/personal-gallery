@@ -5,3 +5,4 @@ export const requestMethods = {
   PATCH: "PATCH",
   DELETE: "DELETE",
 };
+
