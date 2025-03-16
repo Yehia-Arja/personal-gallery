@@ -30,7 +30,7 @@ const useAuthLogic = () => {
         })
 
         if (response.success === true) {
-            setMessage("Signup successfully");
+            setMessage("Sign up successfully");
             setMessageType("success");
             localStorage.setItem('authToken',response.message)
             navigate("/home");

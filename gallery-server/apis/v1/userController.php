@@ -27,22 +27,24 @@ class UserController
             return;
         }
 
-        if (!$this->userModel->findEmail($data['email'])) {
+        $user_id = $this->userModel->findEmail($data['email']);
+
+        if (!$user_id) {
             echo json_encode(['success' => false, 'message' => 'Email does not exist']);
             return;
         }
 
-        if (!$this->userModel->checkPassword($data)) {
+        if (!$this->userModel->checkPassword($data['password'])) {
             echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
             return;
         }
 
-        $token = $this->userModel->generateAuthToken($data['id']);
+        $token = $this->userModel->generateAuthToken($user_id);
 
         echo json_encode([
             'success' => true,
             'auth_key' => $token,
-            'user_id' => $data['id']
+            'user_id' => $user_id
         ]);
     }
 }

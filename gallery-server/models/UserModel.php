@@ -2,7 +2,7 @@
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-
+require_once "config/connection.php";
 require "../vendor/autoload.php";
 
 class UserModel {
