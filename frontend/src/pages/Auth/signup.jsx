@@ -40,7 +40,7 @@ const Signup = () => {
             <div>
               <div className={`message-container ${messageType}`}>{message}</div>
               <button className="welcome-button" onClick={() => { handleSignup(form.username,form.email,form.password) }}>Sign up</button>
-              <p>Already have an account?  
+              <p className="redirect-message">Already have an account?  
                 <Link to="/" className="redirect-login">
                   Login here
                 </Link>

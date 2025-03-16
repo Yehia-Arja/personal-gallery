@@ -1,7 +1,6 @@
 <?php
-require "../../models/UserModel.php";
 
-header('Content-Type: application/json'); 
+require_once "models/UserModel.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -12,7 +11,14 @@ if (!$data) {
 
 class UserController
 {
-    public static function login()
+    private $userModel;
+
+    public function __construct($conn)
+    {
+        $this->userModel = new UserModel($conn);
+    }
+
+    public function login()
     {
         global $data;
 
@@ -21,17 +27,17 @@ class UserController
             return;
         }
 
-        if (!UserModel::findEmail($data['email'])) {
+        if (!$this->userModel->findEmail($data['email'])) {
             echo json_encode(['success' => false, 'message' => 'Email does not exist']);
             return;
         }
 
-        if (!UserModel::checkPassword($data)) {
+        if (!$this->userModel->checkPassword($data)) {
             echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
             return;
         }
 
-        $token = UserModel::generateAuthToken($data['id']);
+        $token = $this->userModel->generateAuthToken($data['id']);
 
         echo json_encode([
             'success' => true,
@@ -39,5 +45,4 @@ class UserController
             'user_id' => $data['id']
         ]);
     }
-    
 }

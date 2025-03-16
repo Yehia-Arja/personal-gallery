@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost/personal-gallery/apis"; 
+axios.defaults.baseURL = "http://localhost/personal-gallery/gallery-server/"; 
 axios.defaults.headers = {
   "Content-Type": "application/json",
 };

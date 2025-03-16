@@ -9,7 +9,7 @@ const Login = () => {
     <>
       <header className="welcome-header">
         <h1>Welcome back</h1>
-        <p>Use email or phone number to log in</p>
+        <p>Use email to log in</p>
       </header>
       <main className="welcome-main">
         <section className="welcome-section">
@@ -33,7 +33,7 @@ const Login = () => {
             <div>
               <div className={`message-container ${messageType}`}>{message}</div>
               <button className="welcome-button" onClick={() => { handleLogin(form.email,form.password) }}>L O G I N</button>
-              <p>Don't have an account?  
+              <p className="redirect-message">Don't have an account?  
                 <Link to="/signup" className="redirect-signup">
                   Sign up here
                 </Link>

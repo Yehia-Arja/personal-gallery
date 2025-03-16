@@ -24,8 +24,8 @@ const useAuthLogic = () => {
         try {
             const response = await request({
                 method: requestMethods.POST,                
-                route: "login",
-                body: { email, password }
+                route: "signin",
+                body: {username, email, password }
                 
         })
 

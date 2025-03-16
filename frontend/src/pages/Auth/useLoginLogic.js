@@ -9,12 +9,13 @@ const useAuthLogic = () => {
         email: "",
         password: ""
     })
+    
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
-    const [messageType, setMessageType] = useState(""); 
-
+    const [messageType, setMessageType] = useState("");
+    
     const handleLogin = async (email, password) => {
-        
+
         if (!email || !password) {
         setMessage("Please fill out all the fields");
         setMessageType("error");
@@ -24,7 +25,7 @@ const useAuthLogic = () => {
             const response = await request({
                 method: requestMethods.POST,                
                 route: "login",
-                body: { email, password }
+                body: { email, password },
                 
         })
 
