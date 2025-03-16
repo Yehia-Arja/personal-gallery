@@ -44,7 +44,7 @@ class UserController
         echo json_encode([
             'success' => true,'message'=>$token]);
     }
-    public function signin()
+    public function signup()
     {
         global $data;
 
@@ -60,7 +60,6 @@ class UserController
         $user_id = $this->userModel->addUser($data);
         $token = $this->userModel->generateAuthToken($user_id);
 
-        echo json_encode([
-            'success' => true,'message'=>$token]);
+        echo json_encode(['success' => true,'message'=>$token]);
     }
 }

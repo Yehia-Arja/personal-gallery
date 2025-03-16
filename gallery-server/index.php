@@ -17,7 +17,7 @@ if ($request == '') {
 
 $apis = [
     '/login'         => ['controller' => 'UserController', 'method' => 'login'],
-    '/create_faq'    => ['controller' => 'FAQController', 'method' => 'addFAQ']
+    '/signup'    => ['controller' => 'UserController', 'method' => 'signup']
 ];
 
 if (isset($apis[$request])) {

@@ -24,7 +24,7 @@ const useAuthLogic = () => {
         try {
             const response = await request({
                 method: requestMethods.POST,                
-                route: "signin",
+                route: "signup",
                 body: {username, email, password }
                 
         })
@@ -35,6 +35,7 @@ const useAuthLogic = () => {
             localStorage.setItem('authToken',response.message)
             navigate("/home");
         } else {
+            console.log(response)
             setMessage(response.message);
             setMessageType("error");
         }
