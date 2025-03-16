@@ -24,17 +24,18 @@ const useAuthLogic = () => {
         try {
             const response = await request({
                 method: requestMethods.POST,                
-                route: "login",
-                body: { email, password }
+                route: "signup",
+                body: {username, email, password }
                 
         })
 
         if (response.success === true) {
-            setMessage("Signup successfully");
+            setMessage("Sign up successfully");
             setMessageType("success");
             localStorage.setItem('authToken',response.message)
             navigate("/home");
         } else {
+            console.log(response)
             setMessage(response.message);
             setMessageType("error");
         }
