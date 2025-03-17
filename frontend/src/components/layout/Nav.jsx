@@ -1,24 +1,20 @@
 import { Link } from "react-router-dom";
-import myImage from "../assets/logo.png";
-import { useState } from "react";
+import myImage from "../../assets/images/logo.png"
 
-const Nav = ({ onSearch }) => {
-    const [query, setQuery] = useState("");
+const Nav = ({ setSearch }) => {
 
     const handleChange = (e) => {
-        setQuery(e.target.value);
-        onSearch(e.target.value);
+        setSearch(e.target.value);
     };
 
     return (
         <nav>
             <ul className="nav-elements">
-                <li><img className="logo" src={myImage} alt="Logo" /></li>
+                <li><img src={myImage} className="logo" alt="Logo" /></li>
                 <li>
                     <input 
                         type="search" 
-                        className="search-bar" 
-                        value={query} 
+                        className="search-bar"  
                         placeholder="Search..." 
                         onChange={handleChange} 
                     />
