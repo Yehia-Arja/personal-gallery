@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/connection.php';
 
-class PhotosModel {
+class PhotoModel {
     private $conn;
 
     public function __construct($db) {
