@@ -1,7 +1,8 @@
 <?php
 require "config/connection.php";
 require "models/UserModel.php";
-header("Content-Type: application/json");
+echo $_POST['tag'];
+return;
 $base_dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -18,7 +19,8 @@ if ($request == '') {
 $apis = [
     '/login'         => ['controller' => 'UserController', 'method' => 'login'],
     '/signup'    => ['controller' => 'UserController', 'method' => 'signup'],
-    '/getphoto' => ['controller' => 'PhotoController', 'method' => 'fetchPhotos']
+    '/getphoto' => ['controller' => 'PhotoController', 'method' => 'fetchPhotos'],
+    '/upload' => ['controller' => 'PhotoController', 'method' => 'UploadPhoto']
 ];
 
 if (isset($apis[$request])) {

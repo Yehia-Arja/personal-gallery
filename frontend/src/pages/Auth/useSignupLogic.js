@@ -11,14 +11,15 @@ const useAuthLogic = () => {
         password: ""
     })
     const navigate = useNavigate();
-    const [message, setMessage] = useState("");
-    const [messageType, setMessageType] = useState(""); 
+    const [message, setMessage] = useState({
+        message: "",
+        color: ""
+    });
 
     const handleSignup = async (username,email, password) => {
         
         if (!username || !email || !password) {
-        setMessage("Please fill out all the fields");
-        setMessageType("error");
+        setMessage({message:"Please fill out all the fields",color:'red'});
         return;
         }
         try {
@@ -30,22 +31,19 @@ const useAuthLogic = () => {
         })
 
         if (response.success === true) {
-            setMessage("Sign up successfully");
-            setMessageType("success");
+            setMessage({message:"Sign up successfully",color:'green'});
             localStorage.setItem('authToken',response.message)
             navigate("/home");
         } else {
             console.log(response)
-            setMessage(response.message);
-            setMessageType("error");
+            setMessage({message:response.message,color:'red'});
         }
         } catch (error) {
-        setMessage(error.message);
-        setMessageType("error");
+        setMessage({message:error.message,color:'red'});
         }
     };
 
-    return { form, setForm, handleSignup, message, messageType }
+    return { form, setForm, handleSignup, message }
 
 }
 export default useAuthLogic;

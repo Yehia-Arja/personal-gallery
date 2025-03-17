@@ -1,9 +1,8 @@
 <?php
-require_once __DIR__ . '/../models/PhotosModel.php';
-require_once __DIR__ . '/../config/connection.php';
+require_once 'config/connection.php';
+require_once  'models/PhotoModel.php';
 
 
-$data = json_decode(file_get_contents("php://input", true));
 
 class PhotoController {
     private $model;
@@ -13,7 +12,7 @@ class PhotoController {
     }
 
     public function fetchPhotos() {
-        global $data;
+        $data = json_decode(file_get_contents("php://input", true));
 
         $photos = $this->model->getPhotos($data['search']);
 
