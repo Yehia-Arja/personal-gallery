@@ -1,5 +1,5 @@
 import useAuthLogic from "./useUploadLogic";
-import "./style.css"
+import "../Auth/style.css"
 
 const Upload = () => {
   const { form, setForm, handleUpload, message, messageType } = useAuthLogic();

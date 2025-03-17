@@ -1,7 +1,7 @@
 import request from "../../utils/remote/axios";
 import { requestMethods } from "../../utils/enums/request.methods";
 import { useState } from "react";
-import "./style.css";
+
 
 const useUploadLogic = () => {
     const [form, setForm] = useState({
