@@ -4,6 +4,7 @@ const Gallery = ({ search }) => {
     const photos = useGalleryLogic(search);
 
     return (
+        
         <div className="image-container">
             {photos.map((photo) => (
                 <div key={photo.id}>

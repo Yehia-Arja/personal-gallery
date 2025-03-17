@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Nav from "../../components/layout/Nav";
-import Gallery from "../gallery/index";
+import Gallery from "../Gallery/index";
 import Hero from "../../components/layout/Hero"
 import "./style.css";
 
