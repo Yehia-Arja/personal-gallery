@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./style.css"
 
 const Login = () => {
-  const { form, setForm, handleLogin, message, messageType } = useAuthLogic();
+  const { form, setForm, handleLogin, message } = useAuthLogic();
 
   return (
     <>
@@ -31,7 +31,7 @@ const Login = () => {
             />
             
             <div>
-              <div className={`message-container ${messageType}`}>{message}</div>
+              <div className={`message-container ${message.color}`}>{message.message}</div>
               <button className="welcome-button" onClick={() => { handleLogin(form.email,form.password) }}>L O G I N</button>
               <p className="redirect-message">Don't have an account?  
                 <Link to="/signup" className="redirect-signup">

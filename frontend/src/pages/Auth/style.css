@@ -109,12 +109,12 @@ body {
 }
 
 
-.success {
+.green {
     color: green;
     text-align: center;
 }
 
-.error {
+.red {
     color: red;
     text-align: center;
 }

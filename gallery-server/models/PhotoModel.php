@@ -16,5 +16,18 @@ class PhotoModel {
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+     public static function storePhoto($photo_url, $photo_tag, $photo_description) {
+        global $conn;
+        $sql = $conn->prepare("INSERT INTO photos (url, tag, description) VALUES (?, ?, ?)");
+        $sql->bind_param("sss", $photo_url, $photo_tag, $photo_description);
+        
+        if (!$sql->execute()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
+
 ?>

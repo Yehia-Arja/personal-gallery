@@ -9,41 +9,41 @@ const useUploadLogic = () => {
         description: "",
         file: ""
     });
-    const [message, setMessage] = useState("");
-    const [messageType, setMessageType] = useState("");
+    const [message, setMessage] = useState({message:"",color:""});
+   
 
     const handleUpload = async (tag, description, file) => {
         
         if (!tag || !description || !file) {
-            setMessage("Please fill out all the fields");
-            setMessageType("error");
+            setMessage({message:'Please fill out all the fields',color:'red'});
             return;
         }
         const formData = new FormData();
         formData.append('tag',tag);
         formData.append('description',description);
-        formData.append('file',file)
+        formData.append('file', file)
+        formData.append('authToken',localStorage.getItem('authToken'))
 
+        
         try {
             const response = await request({
                 method: requestMethods.POST,
                 route: "upload",
-                data: formData
+                data: formData,
             })
             if (response.success === true) {
-                setMessage(response.message);
-                setMessageType('success');
+                setMessage({message: response.message, color: 'green'});
                 return;
             }
-            setMessage(response.message);
-            setMessageType('error');
+            console.log(response);
+            setMessage({message: response.message,color:'red'});
 
             }catch (error) {
                 console.error("Error", error);
             }
        
     }
-    return {form, setForm,handleUpload, message,messageType};
+    return {form, setForm,handleUpload, message};
 }
 
 

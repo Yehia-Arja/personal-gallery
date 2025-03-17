@@ -2,7 +2,7 @@ import useAuthLogic from "./useUploadLogic";
 import "../Auth/style.css"
 
 const Upload = () => {
-  const { form, setForm, handleUpload, message, messageType } = useAuthLogic();
+  const { form, setForm, handleUpload, message } = useAuthLogic();
 
   return (
     <>
@@ -37,7 +37,7 @@ const Upload = () => {
                       
             
             <div>          
-                <div className={`message-container ${messageType}`}>{message}</div>
+                <div className={`message-container ${message.color}`}>{message.message}</div>
                 <button className="welcome-button" onClick={() => { handleUpload(form.tag,form.description,form.file) }}>Upload</button>
             </div>
           </div>
