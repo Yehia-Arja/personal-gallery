@@ -35,6 +35,7 @@ const useUploadLogic = () => {
                 setMessageType('success');
                 return;
             }
+            console.log(response);
             setMessage(response.message);
             setMessageType('error');
 
